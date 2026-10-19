@@ -3,7 +3,11 @@ import { useRef } from 'react'
 import type { PointLight } from 'three'
 import { world } from '../../game/world'
 import { useGameEvents } from '../useGameEvents'
+import { QUALITY } from '../quality'
 import { ROOM, SCREEN_FRONT } from './layout'
+
+const STRING_LIGHTS = [-2.2, -0.6, 1.0, 2.2].map((x) => ({ x, intensity: 0.8 }))
+const STRING_LIGHTS_LIGHT = [-1.4, 1.4].map((x) => ({ x, intensity: 1.5 }))
 
 // Éclairage de nuit, mais lisible : clair de lune par la fenêtre, lampe de bureau chaude,
 // guirlande lumineuse, et la lueur de l'écran de la borne.
@@ -34,7 +38,7 @@ export function RoomLights() {
         position={[-2.2, 3.2, -2]}
         intensity={0.9}
         color="#a9bcff"
-        shadow-mapSize={[2048, 2048]}
+        shadow-mapSize={[QUALITY.shadowMapSize, QUALITY.shadowMapSize]}
         shadow-bias={-0.0004}
         shadow-camera-left={-4}
         shadow-camera-right={4}
@@ -50,9 +54,10 @@ export function RoomLights() {
       {/* Lampe de bureau */}
       <pointLight position={[1.97, 1.15, ROOM.backZ + 0.25]} color="#ffb36b" intensity={3.2} distance={5} decay={2} />
 
-      {/* Guirlande : quelques sources chaudes le long du mur du fond */}
-      {[-2.2, -0.6, 1.0, 2.2].map((x) => (
-        <pointLight key={x} position={[x, 2.45, ROOM.backZ + 0.3]} color="#ffc98a" intensity={0.8} distance={3} decay={2} />
+      {/* Guirlande : quelques sources chaudes le long du mur du fond (deux seulement sur mobile,
+          plus intenses : chaque lumière alourdit le calcul de tous les matériaux) */}
+      {(QUALITY.extraLights ? STRING_LIGHTS : STRING_LIGHTS_LIGHT).map(({ x, intensity }) => (
+        <pointLight key={x} position={[x, 2.45, ROOM.backZ + 0.3]} color="#ffc98a" intensity={intensity} distance={3.5} decay={2} />
       ))}
 
       {/* Lueur de l'écran, et néon du fronton */}

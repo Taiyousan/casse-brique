@@ -11,6 +11,7 @@ import {
   wallpaperTexture,
 } from './canvasTextures'
 import { ROOM } from './layout'
+import { QUALITY } from '../quality'
 import { createRainyWindowMaterial } from './rainyWindowMaterial'
 
 const COLORS = {
@@ -329,7 +330,7 @@ function Nightstand() {
           <cylinderGeometry args={[0.02, 0.035, 0.05, 10]} />
           <meshStandardMaterial color={COLORS.metal} metalness={0.8} roughness={0.25} />
         </mesh>
-        <pointLight position-y={0.22} color="#ff6f8a" intensity={0.6} distance={1.8} decay={2} />
+        {QUALITY.extraLights && <pointLight position-y={0.22} color="#ff6f8a" intensity={0.6} distance={1.8} decay={2} />}
       </group>
     </group>
   )
@@ -379,7 +380,9 @@ function Desk() {
           <meshStandardMaterial color={COLORS.beige} roughness={0.6} />
         </mesh>
       </group>
-      <pointLight position={[-0.2, 0.98, 0.15]} color="#5fe0d0" intensity={0.25} distance={1.2} decay={2} />
+      {QUALITY.extraLights && (
+        <pointLight position={[-0.2, 0.98, 0.15]} color="#5fe0d0" intensity={0.25} distance={1.2} decay={2} />
+      )}
 
       {/* Lampe de bureau : la lumière chaude de la pièce part de son abat-jour (voir RoomLights) */}
       <group position={[0.42, 0.76, -0.1]}>

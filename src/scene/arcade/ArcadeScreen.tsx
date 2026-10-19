@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import { type Mesh, PerspectiveCamera, Scene } from 'three'
 import { useGameStore } from '../../game/store'
 import { GameWorld } from '../GameWorld'
+import { QUALITY } from '../quality'
 import { warmUp } from '../warmUp'
 import { createCrtMaterial } from './crtMaterial'
 import { SCREEN, SCREEN_TEXTURE } from './layout'
@@ -12,7 +13,7 @@ import { screenLink } from './screenPointer'
 // Écran de la borne : le jeu est rendu dans une texture hors écran,
 // puis affiché sur la dalle avec un shader qui imite un tube cathodique.
 export function ArcadeScreen() {
-  const fbo = useFBO(SCREEN_TEXTURE.width, SCREEN_TEXTURE.height, { samples: 4 })
+  const fbo = useFBO(SCREEN_TEXTURE.width, SCREEN_TEXTURE.height, { samples: QUALITY.screenSamples })
   const gameScene = useMemo(() => new Scene(), [])
   const gameCamera = useMemo(() => new PerspectiveCamera(40, SCREEN.width / SCREEN.height, 0.1, 200), [])
   const material = useMemo(() => createCrtMaterial(fbo.texture), [fbo])

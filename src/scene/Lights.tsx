@@ -1,3 +1,5 @@
+import { QUALITY } from './quality'
+
 // Éclairage du jeu dans l'écran : franc et lumineux, avec un soleil en haut à droite
 // qui projette l'ombre des objets sur le fond, pour la lecture de la profondeur.
 const SHADOW_EXTENT = 22
@@ -11,7 +13,7 @@ export function Lights() {
         position={[9, 14, 16]}
         intensity={2.6}
         color="#ffffff"
-        shadow-mapSize={[2048, 2048]}
+        shadow-mapSize={[QUALITY.shadowMapSize, QUALITY.shadowMapSize]}
         shadow-bias={-0.0005}
         shadow-normalBias={0.02}
         shadow-camera-left={-SHADOW_EXTENT}

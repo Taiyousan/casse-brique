@@ -4,9 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Casse-brique 3D</title>
+    <meta
+      name="description"
+      content="Un casse-brique en 3D, joué sur l'écran d'une borne d'arcade dans une chambre des années 90. React Three Fiber, sons synthétisés, 8 niveaux."
+    />
+    <meta name="theme-color" content="#0d0820" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0820'/%3E%3Crect x='3' y='5' width='12' height='6' fill='%23ff4d6d'/%3E%3Crect x='17' y='5' width='12' height='6' fill='%23ffd23f'/%3E%3Crect x='3' y='13' width='12' height='6' fill='%233ab8ff'/%3E%3Ccircle cx='22' cy='18' r='3' fill='%23fff'/%3E%3Crect x='9' y='26' width='14' height='3' fill='%232de2e6'/%3E%3C/svg%3E"
+    />
+    <style>
+      /* Écran de chargement, affiché avant que le JavaScript soit arrivé (remplacé par l'application) */
+      .boot {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: #05040a;
+        color: #2de2e6;
+        font: 16px monospace;
+        letter-spacing: 4px;
+      }
+      .boot span {
+        animation: boot-blink 1s steps(2) infinite;
+      }
+      @keyframes boot-blink {
+        50% {
+          opacity: 0;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="boot"><span>CHARGEMENT…</span></div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
