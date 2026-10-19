@@ -2,6 +2,8 @@
 
 Un casse-brique en 3D, joué sur l'écran d'une borne d'arcade, dans une chambre d'ado des années 90.
 
+**▶ [Jouer en ligne](https://taiyousan-brick-breaker.vercel.app/)**
+
 ![La chambre et la borne d'arcade](docs/menu.png)
 
 ## Le jeu
